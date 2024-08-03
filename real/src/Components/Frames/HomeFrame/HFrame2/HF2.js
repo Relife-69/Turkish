@@ -26,31 +26,24 @@ const HF2 = () => {
         <PicContainer>
           <Pic src={C1}></Pic>
         </PicContainer>
-        <Heading>Gayrimenkul Satın Al</Heading>
-        <Text>Nerede “mükemmel” olduğunu bulun “mutlu” ile tanışır</Text>
-        <Link to="/buy">
-          <Button>GÖZAT ÖZELLİKLERİ</Button>
-        </Link>
+        <Heading> DÜŞÜK EMLAK KOMİSYONLARI </Heading>
+        <text> •	Emlak kiralamak veya satın almak için artık fahiş komisyon ödemek zorunda kalmayın </text>
+        <text> •	Emlak alımında toplamda %0.8 ve kiralamada kira bedelinin toplamda %40’ını ödeyin </text>
       </Card>
       <Card>
         <PicContainer>
           <Pic src={C2}></Pic>
         </PicContainer>
-        <Heading>Bir Mülk Satmak</Heading>
-        <Text>En iyi değeri elde herhangi bir ekonomi</Text>
-        <Link to="/sell">
-          <Button>DETAY EKLE</Button>
-        </Link>
+        <Heading>HUKUKİ GÜVENCE</Heading>
+        <text> •	Her ilanın bir avukatı vardır. Bu aynı zamanda her ilanın bilgilerinin doğruluğunun güvencesidir </text>
+        <text> •	Tüm alım-satım ve kiralama işlemlerinde avukatlar her iki tarafın hakkını koruyacak sözleşmeler yapar </text>
       </Card>
       <Card>
         <PicContainer>
           <Pic src={C3}></Pic>
         </PicContainer>
-        <Heading>Gayrimenkul Kiralama</Heading>
-        <Text>Sevebileceğin yerde yaşa</Text>
-        <Link to="/rent">
-          <Button>KİRALIK FIRSATLARI BUL</Button>
-        </Link>
+        <Heading>YAPAY ZEKÂNIN ÜSTÜN GÜCÜ</Heading>
+        <text> •	Dünya’nın en üstün yapay zeka sistemleriyle emlak işlemlerinizde güven, doğruluk ve verimlilik sağladık</text>
       </Card>
     </MainContainer>
   );

@@ -5,7 +5,7 @@ const Banner = () => {
   return (
     <BannerContainer>
       Bu site şu anda sadece avukatların üyeliğine açıktır. Emlak ilanlarının
-      girişi için ayrı bir duyuru yapılacaktır."
+      girişi için ayrı bir duyuru yapılacaktır.
     </BannerContainer>
   );
 };

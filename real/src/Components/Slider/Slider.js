@@ -24,68 +24,45 @@ const Slider = () => {
     async function fetchAdvertisements() {
       try {
         const response = await axios.get(
-          "https://6d18-139-135-43-130.ngrok-free.app/api/advertisements/",
+          "https://api.guvenlisatkirala.com/api/advertisements/",
           {
             headers: {
               "Content-Type": "application/json",
-              Accept: "application/json",
-              Connection: "keep-alive",
-              "Accept-Encoding": "gzip, deflate, br",
-              // "ngrok-skip-browser-warning": "any-value",
             },
           }
         );
         console.log("API Response:", response.data);
-      } catch (error) {
-        if (error.response) {
-          console.error("Error Response Data:", error.response.data);
-          console.error("Error Response Status:", error.response.status);
-          console.error("Error Response Headers:", error.response.headers);
+
+        if (response.headers["content-type"].includes("application/json")) {
+          const advertisements = response.data;
+          console.log("Advertisements:", advertisements);
+
+          // Transforming the data to match the required structure for the cards
+          const transformedData = advertisements.map((ad) => ({
+            Pic: ad.images[0]?.image || " ",
+            Pic1: ad.images[1]?.image || " ",
+            Name: ad.dynamic_attributes.title,
+            PPrice: ad.dynamic_attributes.price,
+            Beds: ad.dynamic_attributes.rooms,
+            Washs: ad.dynamic_attributes.bathrooms,
+            SqArea: ad.dynamic_attributes.area_sqft,
+            PArea: ad.dynamic_attributes.neighborhood,
+            PCity: ad.location,
+            UpTime: ad.created_at,
+            Href: `/singleproperty/${ad.id}`,
+            isNew: ad.is_new, // Assuming there's a field to indicate if the ad is new
+            isFeatured: ad.is_featured // Assuming there's a field to indicate if the ad is featured
+          }));
+
+          setCardsData(transformedData);
         } else {
-          console.error("Error Message:", error.message);
+          console.error("Expected JSON, but received HTML:", response.data);
         }
+      } catch (error) {
+        console.error("Error fetching advertisements:", error);
       }
     }
-    // async function fetchAdvertisements() {
-    //   try {
-    //     const response = await axios.get(
-    //       "https://6d18-139-135-43-130.ngrok-free.app/api/users/",
-    //       {
-    //         headers: {
-    //           "Content-Type": "application/json",
-    //           Accept: "application/json",
-    //           // "ngrok-skip-browser-warning": "any-value",
-    //         },
-    //       }
-    //     );
-    //     console.log("API Response:", response);
 
-    //     if (response.headers["content-type"].includes("application/json")) {
-    //       const advertisements = response.data;
-    //       console.log("Advertisements:", advertisements);
-
-    //       // Transforming the data to match the required structure for the cards
-    //       const transformedData = advertisements.map((ad) => ({
-    //         Pic: ad.images[0]?.image || "",
-    //         Pic1: ad.images[1]?.image || "",
-    //         Name: ad.dynamic_attributes.title,
-    //         PPrice: ad.dynamic_attributes.price,
-    //         Beds: ad.dynamic_attributes.rooms,
-    //         Washs: ad.dynamic_attributes.bathrooms,
-    //         SqArea: ad.dynamic_attributes.area_sqft,
-    //         PArea: ad.dynamic_attributes.neighborhood,
-    //         PCity: ad.location,
-    //         UpTime: ad.created_at,
-    //       }));
-
-    //       setCardsData(transformedData);
-    //     } else {
-    //       console.error("Expected JSON, but received HTML:", response.data);
-    //     }
-    //   } catch (error) {
-    //     console.error("Error fetching data:", error);
-    //   }
-    // }
     fetchAdvertisements();
   }, []);
 
@@ -108,9 +85,9 @@ const Slider = () => {
       <TextContainer>
         <Heading>İstanbul'da Satılık Gayrimenkuller</Heading>
         <ButtonContainer>
-          <Button>Yerleşim yerleri</Button>
-          <Button>Ticari mallar</Button>
-          <Button>Arsalar</Button>
+          <Button> DAİRELER </Button>
+          <Button> İŞ YERLERİ </Button>
+          <Button> ARSALAR </Button>
         </ButtonContainer>
         <SliderContainer>
           <Lbutton onClick={btnpressprev}>
@@ -125,13 +102,16 @@ const Slider = () => {
                   Pic={card.Pic}
                   Pic1={card.Pic1}
                   Name={card.Name}
-                  PPrice={card.PPrice}
+                  PPrice={card.PPrice.toLocaleString('tr-TR', { style: 'currency', currency: 'TRY' })}
                   SqArea={card.SqArea}
                   Beds={card.Beds}
                   Washs={card.Washs}
                   PArea={card.PArea}
                   PCity={card.PCity}
-                  UpTime={new Date(card.UpTime).toLocaleString()}
+                  UpTime={new Date(card.UpTime).toLocaleDateString('tr-TR', { day: 'numeric', month: 'long' })}
+                  Href={card.Href}
+                  isNew={card.isNew}
+                  isFeatured={card.isFeatured}
                 />
               </CardContainer>
             ))}

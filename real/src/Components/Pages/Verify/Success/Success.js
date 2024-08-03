@@ -9,8 +9,13 @@ import {
   Picture,
 } from "./StyledSuccess";
 import Verify from "../../../Images/Verified.png";
+import { useNavigate } from "react-router-dom";
 
 const Success = () => {
+  const navigate = useNavigate();
+  const Home = () => {
+    navigate("/");
+  };
   return (
     <Maincontainer>
       <TextContainer>
@@ -18,7 +23,7 @@ const Success = () => {
           <Heading>Verification Successful</Heading>
           <Text>Hesabınızı başarıyla doğruladınız</Text>
         </TextContainer2>
-        <Button>Tamamlamak</Button>
+        <Button onClick={Home}>Tamamlamak</Button>
       </TextContainer>
       <Picture src={Verify} alt="Verify"></Picture>
     </Maincontainer>

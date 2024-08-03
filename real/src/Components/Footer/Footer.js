@@ -1,8 +1,6 @@
 import React from "react";
 import {
   MainFooter,
-  // Logo,
-  // LogoContaienr,
   MenuContainer,
   Menu,
   List,
@@ -10,8 +8,8 @@ import {
   SocialContainer,
   Socail,
   SocailLink,
+  MenuHeading,
 } from "./StyledFooter";
-// import Pic from "../Images/1.png";
 import Pic1 from "../Images/S1.png";
 import Pic2 from "../Images/S2.png";
 import Pic3 from "../Images/S3.png";
@@ -46,14 +44,15 @@ const Footer = () => {
       </SocialContainer>
       <MenuContainer>
         <Menu>
+          <MenuHeading>SAYFALAR</MenuHeading>
           <List>
             <FLink>
-              <Link to="/">EV</Link>
+              <Link to="/">ANA SAYFA</Link>
             </FLink>
           </List>
           <List>
             <FLink>
-              <Link to="/story">BIZIM HIKAYEMIZ</Link>
+              <Link to="/story">HAKKIMIZDA</Link>
             </FLink>
           </List>
           <List>
@@ -71,44 +70,51 @@ const Footer = () => {
               <Link to="/contuctus">BİZE ULAŞIN</Link>
             </FLink>
           </List>
+        </Menu>
+      </MenuContainer>
+      <MenuContainer>
+        <Menu>
+          <MenuHeading>SÖZLEŞMELER</MenuHeading>
           <List>
             <FLink>
-              <Link to="/rentagreement">Waray</Link>
+              <Link to="/C1" target="blank">
+                ÇEREZ POLİTİKASI
+              </Link>
             </FLink>
           </List>
           <List>
             <FLink>
-              <Link to="/singleproject">Waray2</Link>
+              <Link to="/C2" target="blank">
+                İLAN_YAYINLAMA_KURALLARI
+              </Link>
             </FLink>
           </List>
           <List>
             <FLink>
-              <Link to="/email">Waray2</Link>
+              <Link to="/C3" target="blank">
+                KULLANIM KOŞULLARI
+              </Link>
             </FLink>
           </List>
           <List>
             <FLink>
-              <Link to="/otp">Waray2</Link>
+              <Link to="/C4" target="blank">
+                İŞLEM REHBERİ
+              </Link>
             </FLink>
           </List>
           <List>
             <FLink>
-              <Link to="/success">Waray2</Link>
+              <Link to="/C5" target="blank">
+                KİŞİSEL VERİLERİN KORUNMASI HAKKINDA
+              </Link>
             </FLink>
           </List>
           <List>
             <FLink>
-              <Link to="/signin">Waray2</Link>
-            </FLink>
-          </List>
-          <List>
-            <FLink>
-              <Link to="/activeads">Waray2</Link>
-            </FLink>
-          </List>
-          <List>
-            <FLink>
-              <Link to="/lawyer">Waray2</Link>
+              <Link to="/C6" target="blank">
+                ÜYELİK SÖZLEŞMESİ VE GİZLİLİK POLİTİKASI
+              </Link>
             </FLink>
           </List>
         </Menu>

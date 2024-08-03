@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   MainContainer,
   CardContain,
@@ -13,55 +13,54 @@ import axios from "axios";
 
 const Active = () => {
   const [showSideBar, setShowSideBar] = useState(false);
-  const [cardsData, setCardsData] = useState([]);
-
   const toggleSideBar = () => {
     setShowSideBar(!showSideBar);
   };
+  const [cardsData, setCardsData] = useState([]);
+  const productContainerRef = useRef(null);
 
   useEffect(() => {
-    const fetchData = async () => {
+    async function fetchAdvertisements() {
       try {
         const response = await axios.get(
-          // "https://b074-103-191-122-108.ngrok-free.app/checkServer",
-          "https://3675-156-146-51-75.ngrok-free.app/api/advertisements/",
+          "https://api.guvenlisatkirala.com/api/users/active-advertisements/",
           {
             headers: {
               "Content-Type": "application/json",
-              "ngrok-skip-browser-warning": "any-value",
-              "Access-Control-Allow-Origin": "*",
             },
           }
         );
-        console.log(response);
-        // if (response.status === 200) {
-        //   if (Array.isArray(response.data))
-        //     //  {
-        //     // const data = response.data.map((item) => ({
-        //     //   Pic: item.images[0]?.image,
-        //     //   Pic1: item.images[1]?.image,
-        //     //   Name: item.dynamic_attributes.title,
-        //     //   PPrice: item.dynamic_attributes.price,
-        //     //   Beds: item.dynamic_attributes.rooms,
-        //     //   Washs: item.dynamic_attributes.bathrooms,
-        //     //   SqArea: item.dynamic_attributes.area_sqft,
-        //     //   PArea: item.dynamic_attributes.floors,
-        //     //   PCity: item.location,
-        //     //   UpTime: item.created_at,
-        //     // }));
-        //     setCardsData(data);
-        //   } else {
-        //     console.error("API response data is not an array:", response.data);
-        //   }
-        // } else {
-        //   console.error("Unexpected response status:", response.status);
-        // }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+        console.log("API Response:", response.data);
 
-    fetchData();
+        if (response.headers["content-type"].includes("application/json")) {
+          const advertisements = response.data;
+          console.log("Advertisements:", advertisements);
+
+          // Transforming the data to match the required structure for the cards
+          const transformedData = advertisements.map((ad) => ({
+            Pic: ad.images[0]?.image || " ",
+            Pic1: ad.images[1]?.image || " ",
+            Name: ad.dynamic_attributes.title,
+            PPrice: ad.dynamic_attributes.price,
+            Beds: ad.dynamic_attributes.rooms,
+            Washs: ad.dynamic_attributes.bathrooms,
+            SqArea: ad.dynamic_attributes.area_sqft,
+            PArea: ad.dynamic_attributes.neighborhood,
+            PCity: ad.location,
+            UpTime: ad.created_at,
+            Href: `/singleproperty/${ad.id}`, // Corrected the Href assignment
+          }));
+
+          setCardsData(transformedData);
+        } else {
+          console.error("Expected JSON, but received HTML:", response.data);
+        }
+      } catch (error) {
+        console.error("Error fetching advertisements:", error);
+      }
+    }
+
+    fetchAdvertisements();
   }, []);
   return (
     <>
@@ -71,10 +70,12 @@ const Active = () => {
           <GiHamburgerMenu />
         </Humburger>
         <DashSidebar showSideBar={showSideBar} />
-        <CardContain>
+        <CardContain ref={productContainerRef}>
           {cardsData.map((card, index) => (
             <CardContainer key={index}>
               <Buycard
+                Pic={card.Pic}
+                Pic1={card.Pic1}
                 Name={card.Name}
                 PPrice={card.PPrice}
                 SqArea={card.SqArea}
@@ -82,7 +83,8 @@ const Active = () => {
                 Washs={card.Washs}
                 PArea={card.PArea}
                 PCity={card.PCity}
-                UpTime={card.UpTime}
+                UpTime={new Date(card.UpTime).toLocaleString()}
+                Href={card.Href} // Pass Href to Buycard
               />
             </CardContainer>
           ))}

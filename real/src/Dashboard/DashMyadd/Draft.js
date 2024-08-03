@@ -1,105 +1,78 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import DashNav from "../DashNavbar/DashNav";
-import { MainContainer, CardContain, CardContainer } from "./StyledDraft";
+import {
+  MainContainer,
+  CardContain,
+  CardContainer,
+  Humburger,
+} from "./StyledDraft";
 import DashSidebar from "../DashSidebar/DashSidebar";
 import Buycard from "../../Components/Card/BuyCard/Buycard";
-import CardPic from "../../Components/Images/Buy.png";
-import CardPic1 from "../../Components/Images/CardImage.png";
+import { GiHamburgerMenu } from "react-icons/gi";
+import axios from "axios";
+// import CardPic from "../../Components/Images/Buy.png";
+// import CardPic1 from "../../Components/Images/CardImage.png";
 
 const Draft = () => {
-  const cardsData = [
-    {
-      Pic: CardPic,
-      Pic1: CardPic1,
-      Name: "Villa Boğaz",
-      PPrice: "50,000",
-      Beds: "2",
-      Washs: "2",
-      SqArea: "7 Marla",
-      PArea: "1-10",
-      PCity: "Istanbul",
-      UpTime: "3 saat önce eklendi",
-    },
-    {
-      Pic: CardPic,
-      Pic1: CardPic1,
-      Name: "Villa Boğaz",
-      PPrice: "50,000",
-      Beds: "2",
-      Washs: "2",
-      SqArea: "7 Marla",
-      PArea: "1-10",
-      PCity: "Istanbul",
-      UpTime: "3 saat önce eklendi",
-    },
+  const [showSideBar, setShowSideBar] = useState(false);
+  const toggleSideBar = () => {
+    setShowSideBar(!showSideBar);
+  };
+  const [cardsData, setCardsData] = useState([]);
+  const productContainerRef = useRef(null);
 
-    {
-      Pic: CardPic,
-      Pic1: CardPic1,
-      Name: "Villa Boğaz",
-      PPrice: "50,000",
-      Beds: "2",
-      Washs: "2",
-      SqArea: "7 Marla",
-      PArea: "1-10",
-      PCity: "Istanbul",
-      UpTime: "3 saat önce eklendi",
-    },
-    {
-      Pic: CardPic,
-      Pic1: CardPic1,
-      Name: "Villa Boğaz",
-      PPrice: "50,000",
-      Beds: "2",
-      Washs: "2",
-      SqArea: "7 Marla",
-      PArea: "1-10",
-      PCity: "Istanbul",
-      UpTime: "3 saat önce eklendi",
-    },
-    {
-      Pic: CardPic,
-      Pic1: CardPic1,
-      Name: "Villa Boğaz",
-      PPrice: "50,000",
-      Beds: "2",
-      Washs: "2",
-      SqArea: "7 Marla",
-      PArea: "1-10",
-      PCity: "Istanbul",
-      UpTime: "3 saat önce eklendi",
-    },
-    {
-      Pic: CardPic,
-      Pic1: CardPic1,
-      Name: "Villa Boğaz",
-      PPrice: "50,000",
-      Beds: "2",
-      Washs: "2",
-      SqArea: "7 Marla",
-      PArea: "1-10",
-      PCity: "Istanbul",
-      UpTime: "3 saat önce eklendi",
-    },
-    {
-      Pic: CardPic,
-      Pic1: CardPic1,
-      Name: "Villa Boğaz",
-      PPrice: "50,000",
-      Beds: "2",
-      Washs: "2",
-      SqArea: "7 Marla",
-      PArea: "1-10",
-      PCity: "Istanbul",
-      UpTime: "3 saat önce eklendi",
-    },
-  ];
+  useEffect(() => {
+    async function fetchAdvertisements() {
+      try {
+        const response = await axios.get(
+          "https://api.guvenlisatkirala.com/api/users/draft-advertisements/",
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        console.log("API Response:", response.data);
+
+        if (response.headers["content-type"].includes("application/json")) {
+          const advertisements = response.data;
+          console.log("Advertisements:", advertisements);
+
+          // Transforming the data to match the required structure for the cards
+          const transformedData = advertisements.map((ad) => ({
+            Pic: ad.images[0]?.image || " ",
+            Pic1: ad.images[1]?.image || " ",
+            Name: ad.dynamic_attributes.title,
+            PPrice: ad.dynamic_attributes.price,
+            Beds: ad.dynamic_attributes.rooms,
+            Washs: ad.dynamic_attributes.bathrooms,
+            SqArea: ad.dynamic_attributes.area_sqft,
+            PArea: ad.dynamic_attributes.neighborhood,
+            PCity: ad.location,
+            UpTime: ad.created_at,
+            Href: `/singleproperty/${ad.id}`, // Corrected the Href assignment
+          }));
+
+          setCardsData(transformedData);
+        } else {
+          console.error("Expected JSON, but received HTML:", response.data);
+        }
+      } catch (error) {
+        console.error("Error fetching advertisements:", error);
+      }
+    }
+
+    fetchAdvertisements();
+  }, []);
   return (
     <>
       <DashNav />
       <MainContainer>
-        <DashSidebar />
-        <CardContain>
+        <Humburger onClick={toggleSideBar}>
+          <GiHamburgerMenu />
+        </Humburger>
+        <DashSidebar showSideBar={showSideBar} />
+        <CardContain ref={productContainerRef}>
           {cardsData.map((card, index) => (
             <CardContainer key={index}>
               <Buycard
@@ -112,7 +85,8 @@ const Draft = () => {
                 Washs={card.Washs}
                 PArea={card.PArea}
                 PCity={card.PCity}
-                UpTime={card.UpTime}
+                UpTime={new Date(card.UpTime).toLocaleString()}
+                Href={card.Href} // Pass Href to Buycard
               />
             </CardContainer>
           ))}

@@ -64,7 +64,7 @@ export const Text = styled.p`
 `;
 export const Text2 = styled.p`
   font-family: "Montserrat", sans-serif;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 400;
   line-height: 14.63px;
   margin: 0%;

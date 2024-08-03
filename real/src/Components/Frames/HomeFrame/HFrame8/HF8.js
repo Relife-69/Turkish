@@ -26,26 +26,7 @@ const HF8 = () => {
     }
   ];
 
-  return (
-    <MainContainer>
-      <TextContainer>
-        <Heading>Olaylar</Heading>
-        <Description>En iyi karşılanan kampanyalarımızdan bazılarının manzarasında gezinin!</Description>
-      </TextContainer>
-      <CardHolder>
-        {/* Map over the cardsData array and render a Card2 component for each object */}
-        {cardsData.map((card, index) => (
-          <Card2
-            key={index}
-            Pict={card.Pict}
-            Text={card.Text}
-            Desc={card.Desc}
-            Link={card.Link}
-          />
-        ))}
-      </CardHolder>
-    </MainContainer>
-  );
+
 };
 
 export default HF8;

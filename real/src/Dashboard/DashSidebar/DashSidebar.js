@@ -28,46 +28,51 @@ const DashSidebar = ({ showSideBar }) => {
       <Link to="/">
         <ListContainer>
           <FaHome />
-          Ev
+          Ana Sayfa
         </ListContainer>
       </Link>
-      <Link to="/activeads">
-        <ListContainer>
+      <Link>
+        <ListContainer onClick={() => toggleMenu("İlanlarım")}>
           <MdOutlineAdsClick />
           İlanlarım
           <DragDown>
-            <IoIosArrowDown onClick={() => toggleMenu("İlanlarım")} />
+            <IoIosArrowDown />
           </DragDown>
         </ListContainer>
       </Link>
       <List2Container showMenu={openMenu === "İlanlarım"}>
+        <Link to="/allad">
+          <List>
+            <FaArrowRight /> İlanlar
+          </List>
+        </Link>
         <Link to="/activeads">
           <List>
-            <FaArrowRight /> Aktif Reklamlar
+            <FaArrowRight /> Aktif İlanlarım
           </List>
         </Link>
         <Link to="/inactiveads">
           <List>
             <FaArrowRight />
-            Pasif Reklamlar
+            Pasif İlanlarım
           </List>
         </Link>
         <Link to="/expireads">
           <List>
             <FaArrowRight />
-            Reklamların Süresi Doldu
+            Süresi Dolan İlanlarım
           </List>
         </Link>
         <Link to="/draftads">
           <List>
             <FaArrowRight />
-            Taslak Reklamlar
+            Taslak İlanlarım
           </List>
         </Link>
         <Link to="/deleteads">
           <List>
             <FaArrowRight />
-            Reklamları Sil
+            İlanlarım Sil
           </List>
         </Link>
       </List2Container>
@@ -84,13 +89,13 @@ const DashSidebar = ({ showSideBar }) => {
         <Link>
           <List>
             <FaArrowRight />
-            Reklamlarımı Vurgula Benzerlikleri Arasında
+            İlanımı Öne Çıkar
           </List>
         </Link>
         <Link>
           <List>
             <FaArrowRight />
-            Reklamımı Göster Ana Sayfa
+            İlanımı Ana Sayfada Göster
           </List>
         </Link>
       </List2Container>
@@ -109,7 +114,7 @@ const DashSidebar = ({ showSideBar }) => {
         <Link to="/favourite">
           <List>
             <FaArrowRight />
-            Favori Reklamlar
+            Favori İlanlar
           </List>
         </Link>
         <Link>
@@ -132,11 +137,11 @@ const DashSidebar = ({ showSideBar }) => {
         </ListContainer>
       </Link>
       <Link>
-        <ListContainer>
+        <ListContainer onClick={() => toggleMenu("Üyeliğim")}>
           <GiMonkFace />
           Üyeliğim
           <DragDown>
-            <IoIosArrowDown onClick={() => toggleMenu("Üyeliğim")} />
+            <IoIosArrowDown />
           </DragDown>
         </ListContainer>
       </Link>
@@ -157,6 +162,18 @@ const DashSidebar = ({ showSideBar }) => {
           <List>
             <FaArrowRight />
             Hesabımı sil
+          </List>
+        </Link>
+        <Link to="/">
+          <List>
+            <FaArrowRight />
+            Üyelik Paketlerim
+          </List>
+        </Link>
+        <Link to="/">
+          <List>
+            <FaArrowRight />
+            Ödemelerim
           </List>
         </Link>
       </List2Container>

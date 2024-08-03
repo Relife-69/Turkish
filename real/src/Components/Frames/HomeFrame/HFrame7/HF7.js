@@ -34,14 +34,14 @@ const HF7 = () => {
               <DownloadPic src={Pice2} />
               <DownloadTextContainer>
                 <DownloadHeading>Şuradan indirin</DownloadHeading>
-                <DownloadPara>UYGULAMA MAĞAZASI</DownloadPara>
+                <DownloadPara> APPLE STORE </DownloadPara>
               </DownloadTextContainer>
             </Download3>
             <Download2>
               <DownloadPic src={Pice3} />
               <DownloadTextContainer>
-                <DownloadHeading>Başla</DownloadHeading>
-                <DownloadPara>OYUN MAĞAZASI</DownloadPara>
+                <DownloadHeading> İNDİR </DownloadHeading>
+                <DownloadPara> PLAY STORE </DownloadPara>
               </DownloadTextContainer>
             </Download2>
           </Download>

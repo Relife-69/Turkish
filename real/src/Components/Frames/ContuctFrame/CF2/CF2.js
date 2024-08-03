@@ -28,17 +28,17 @@ const CF2 = () => {
         <Heading>Daha Fazla Bilgi İçin Bize Ulaşın</Heading>
         <Description>
           Herhangi bir ihtiyacınız varsa lütfen bizimle iletişime geçmekten
-          çekinmeyin daha fazla bilgi. Cevaplamak için her zaman ulaşılabilir
-          durumdayız Sorularınız ve hizmetlerimiz hakkında tam bilgi verin.
+          çekinmeyin. Cevaplamak için her zaman ulaşılabilir
+          durumdayız.
         </Description>
         <InputContainer>
           <Input0>
             <Icon src={Mail}></Icon>
-            <Contact>info@logo.com</Contact>
+            <Contact>info@guvenlisatkirala.com</Contact>
           </Input0>
           <Input0>
             <Icon src={Dial}></Icon>
-            <Contact>111-555-555</Contact>
+            <Contact> 0546 421 06 21</Contact>
           </Input0>
         </InputContainer>
         <MapContainer>
@@ -74,12 +74,11 @@ const CF2 = () => {
           <CheckBox>
             <Check type="checkbox" name="checkbox" id="checkbox" />
             <Label>
-              Tıklayarak SMS ve e-posta almayı kabul ediyorum. kanal sağladı.
-              Oranlar uygulanabilir
+              Tıklayarak SMS ve e-posta almayı kabul ediyorum.
             </Label>
           </CheckBox>
         </InputContainer>
-        <Button btntype="Main" cb text="GÖNDERMEK" />
+        <Button btntype="Main" cb text="Yayınla" />
       </RightContainer>
     </MainContainer>
   );

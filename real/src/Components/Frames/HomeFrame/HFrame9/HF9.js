@@ -11,63 +11,63 @@ const HF9 = () => {
             </TextContainer>
             <CardHolder>
                 <Card>
-                    <CardHeading>EV</CardHeading>
+                    <CardHeading>Ana Sayfa</CardHeading>
                     <MenuContainer>
                         <Menu>
                             <List>
-                                <CLink>İstanbul'da satılık ev</CLink>
+                                <CLink>İstanbul'da Satılık Daire</CLink>
                             </List>
                             <List>
-                                <CLink>Ankara'da satılık ev</CLink>
+                                <CLink>Ankara'da Satılık Daire</CLink>
                             </List>
                             <List>
-                                <CLink>Antalya'da satılık ev</CLink>
+                                <CLink> İzmir'de Satılık Daire</CLink>
                             </List>
                             <List>
-                                <CLink>Bursa'da satılık ev</CLink>
+                                <CLink>Bursa'da Satılık Daire</CLink>
                             </List>
                             <List>
-                                <CLink>Adana'da satılık ev</CLink>
+                                <CLink>Adana'da Satılık Daire</CLink>
                             </List>
                             <List>
-                                <CLink>Bodrum'da satılık ev</CLink>
+                                <CLink>Bodrum'da Satılık Daire</CLink>
                             </List>
                             <List>
-                                <CLink>Samsun'da satılık ev</CLink>
+                                <CLink>Samsun'da Satılık Daire</CLink>
                             </List>
                             <List>
-                                <CLink>Artvin'da satılık ev</CLink>
+                                <CLink>Kocaeli'de Satılık Daire</CLink>
                             </List>
                         </Menu>
                     </MenuContainer>
                 </Card>
                 <Card>
-                    <CardHeading>Daireler ve Daireler</CardHeading>
+                    <CardHeading>Daireler </CardHeading>
                     <MenuContainer>
                         <Menu>
                             <List>
-                                <CLink>İstanbul'da satılık daireler ve daireler</CLink>
+                                <CLink>İstanbul'da satılık daireler </CLink>
                             </List>
                             <List>
-                                <CLink>Ankara'da satılık daireler ve daireler</CLink>
+                                <CLink>Ankara'da satılık daireler </CLink>
                             </List>
                             <List>
-                                <CLink>Antalya'da satılık daireler ve daireler</CLink>
+                                <CLink>Antalya'da satılık daireler </CLink>
                             </List>
                             <List>
-                                <CLink>Bursa'da satılık daireler ve daireler</CLink>
+                                <CLink>Bursa'da satılık daireler </CLink>
                             </List>
                             <List>
-                                <CLink>Adana'da satılık daireler ve daireler</CLink>
+                                <CLink>Adana'da satılık daireler </CLink>
                             </List>
                             <List>
-                                <CLink>Bodrum'da satılık daireler ve daireler</CLink>
+                                <CLink>Bodrum'da satılık daireler </CLink>
                             </List>
                             <List>
-                                <CLink>Samsun'da satılık daireler ve daireler</CLink>
+                                <CLink>Samsun'da satılık daireler </CLink>
                             </List>
                             <List>
-                                <CLink>Artvin'da satılık daireler ve daireler</CLink>
+                                <CLink>Kocaeli'de Satılık Daireler </CLink>
                             </List>
                         </Menu>
                     </MenuContainer>
@@ -108,28 +108,28 @@ const HF9 = () => {
                     <MenuContainer>
                         <Menu>
                             <List>
-                                <CLink>İstanbul'da satılık Odalar</CLink>
+                                <CLink>İstanbul'da satılık Ofisler</CLink>
                             </List>
                             <List>
-                                <CLink>Ankara'da satılık Odalar</CLink>
+                                <CLink>Ankara'da satılık Ofisle</CLink>
                             </List>
                             <List>
-                                <CLink>Antalya'da satılık Odalar</CLink>
+                                <CLink>Antalya'da satılık Ofisle</CLink>
                             </List>
                             <List>
-                                <CLink>Bursa'da satılık Odalar</CLink>
+                                <CLink>Bursa'da satılık Ofisle</CLink>
                             </List>
                             <List>
-                                <CLink>Adana satılık Odalar</CLink>
+                                <CLink>Adana satılık Ofisle</CLink>
                             </List>
                             <List>
-                                <CLink>Bodrum satılık Odalar</CLink>
+                                <CLink>Bodrum satılık Ofisle</CLink>
                             </List>
                             <List>
-                                <CLink>Samsun satılık Odalar</CLink>
+                                <CLink>Samsun satılık Ofisle</CLink>
                             </List>
                             <List>
-                                <CLink>Artvin satılık Odalar</CLink>
+                                <CLink> Kocaeli satılık Ofisle</CLink>
                             </List>
                         </Menu>
                     </MenuContainer>

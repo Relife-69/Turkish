@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import {
   MainContainer,
@@ -11,45 +11,82 @@ import {
   SuccessMessage,
 } from "./StyledEmail";
 import EmailPic from "../../../Images/Email.png";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Email = () => {
-  const [emailFromAPI, setEmailFromAPI] = useState("");
+  const [emailFromStorage, setEmailFromStorage] = useState("");
+  const [phoneNumberFromStorage, setPhoneNumberFromStorage] = useState("");
+  const [usernameFromStorage, setUsernameFromStorage] = useState("");
   const [error, setError] = useState("");
   const [msg, setMsg] = useState("");
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
-    const fetchEmail = async () => {
-      try {
-        const url = "https://7ef3-103-26-82-46.ngrok-free.app/api/users/";
-        const { data } = await axios.get(url);
-        setEmailFromAPI(data.username); //
-      } catch (error) {
-        console.error("Error fetching email from API:", error);
-        setError("Failed to fetch email from API.");
-      }
-    };
+    const username = localStorage.getItem("username");
+    const phone_number = localStorage.getItem("phone_number");
 
-    fetchEmail();
-  }, []);
+    if (username && phone_number) {
+      setUsernameFromStorage(username);
+      setPhoneNumberFromStorage(phone_number);
+    } else {
+      setError("Username or phone number not found in storage.");
+    }
 
-  const handleVerifyEmail = async () => {
+    const searchParams = new URLSearchParams(location.search);
+    const token = searchParams.get("token");
+
+    // if (username && token) {
+    //   handleVerifyEmail(username, token);
+    // } else {
+    //   // setError("Invalid verification link.");
+    // }
+  }, [location]);
+
+  const handleVerifyEmail = async (username, token) => {
     try {
-      const url = await axios.post(
-        "https://7ef3-103-26-82-46.ngrok-free.app/api/email-verify/"
+      const verificationResult = await axios.post(
+        "https://api.guvenlisatkirala.com/api/send-verification-email/",
+        { username },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Basic ${token}`,
+          },
+        }
       );
-      const { data: res } = await axios.post(url, { email: emailFromAPI });
-      setMsg(res.message);
-      alert("Email Verification sent to your Gamil");
+
+      const sendOtpResponse = await axios.post(
+        "https://api.guvenlisatkirala.com/api/send-otp/",
+        { phone_number: phoneNumberFromStorage },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Basic ${token}`,
+          },
+        }
+      );
+
+      console.log("OTP Response:", sendOtpResponse);
+
+      if (sendOtpResponse.data?.message === "OTP sent successfully.") {
+        setMsg("OTP sent successfully.");
+        setMsg("Email sent successfully.");
+        // navigate("/otp");
+      } else {
+        setError("Failed to send OTP.");
+      }
     } catch (error) {
-      console.error("Error verifying email:", error);
       if (
         error.response &&
         error.response.status >= 400 &&
         error.response.status <= 500
       ) {
-        setError(error.response.data.message);
+        // setError(error.response.data.error || "Failed to verify email.");
       } else {
-        setError("An unexpected error occurred.");
+        // setError("Failed to verify email.");
       }
     }
   };
@@ -62,13 +99,16 @@ const Email = () => {
           adresinizi doğrulayın
         </Heading>
         <Text>
-          <span>{emailFromAPI} </span>
+          <span>{usernameFromStorage} </span>
           adresini kullanıcı olarak girdiniz. Lütfen aşağıdaki butona tıklayarak
           bu e-posta adresini doğrulayın
         </Text>
         {error && <ErrorMessage>{error}</ErrorMessage>}
         {msg && <SuccessMessage>{msg}</SuccessMessage>}
-        <Button type="button" onClick={handleVerifyEmail}>
+        <Button
+          type="button"
+          onClick={() => handleVerifyEmail(usernameFromStorage)}
+        >
           Hesabınızı Doğrulayın
         </Button>
       </TextContainer>

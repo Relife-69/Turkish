@@ -6,6 +6,7 @@ export const MainContainer = styled.div`
   align-items: center;
   gap: 30px;
   background-color: #eef1f9;
+  margin-top: 30px;
 `;
 
 export const Text = styled.p`

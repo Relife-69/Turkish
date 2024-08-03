@@ -27,6 +27,7 @@ const Menu = styled.ul`
   justify-content: space-between;
   list-style: none;
   gap: 15px;
+  flex-direction: column;
   @media (max-width: 900px) {
     flex-direction: column;
     padding: 0%;
@@ -54,7 +55,11 @@ const SocialContainer = styled.div`
 
 const Socail = styled.img``;
 const SocailLink = styled.a``;
-
+const MenuHeading = styled.div`
+  color: #7b2cbf;
+  font-size: 20px;
+  font-weight: 600;
+`;
 export {
   SocailLink,
   MainFooter,
@@ -66,4 +71,5 @@ export {
   FLink,
   SocialContainer,
   Socail,
+  MenuHeading,
 };

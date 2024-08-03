@@ -89,7 +89,7 @@ const RentAgreement = () => {
           <Option>Dişi</Option>
           <Option>SÖYLEMEMEK DAHA İYİ</Option>
         </Input3>
-        <Button>Göndermek</Button>
+        <Button>Yükle</Button>
       </LeftContainer>
       <RightContainer>
         <Picture src={Agree}></Picture>

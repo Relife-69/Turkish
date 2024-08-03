@@ -692,3 +692,13 @@ export const PriceShow = styled.div`
   justify-content: start;
   gap: 10px;
 `;
+export const InputHolder = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+`;
+export const InputCardHolder = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+`;

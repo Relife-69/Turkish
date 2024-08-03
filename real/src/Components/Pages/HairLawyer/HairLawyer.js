@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Navbar from "../../Header/Navbar/Navbar";
 import {
   Button,
@@ -11,14 +12,13 @@ import {
   Logo,
   Maincontainer,
   RightContainer,
-  Search,
   SearchContainer,
-  SearchIcon,
   SearchLawyer,
   Heading2,
   SearchInput,
   DropdownContainer,
   Option,
+  LawyerContainer,
 } from "./StyledHairLawyer";
 import { FaSearch } from "react-icons/fa";
 import Law from "../../Images/Lawyer.png";
@@ -29,17 +29,66 @@ const HairLawyer = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
+  const [lawyers, setLawyers] = useState([]);
+  const [selectedLawyer, setSelectedLawyer] = useState(null);
 
-  const options = ["George J.....", "Lawyer 1", "Lawyer 2", "Lawyer 3"];
+  useEffect(() => {
+    async function fetchLawyers() {
+      try {
+        const response = await axios.get(
+          "https://api.guvenlisatkirala.com/api/lawyers/",
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        console.log("API Response:", response.data);
+        setLawyers(response.data);
+      } catch (error) {
+        console.error("Error fetching lawyers:", error);
+      }
+    }
 
-  const filteredOptions = options.filter((option) =>
-    option.toLowerCase().includes(searchTerm.toLowerCase())
+    fetchLawyers();
+  }, []);
+
+  const filteredOptions = lawyers.filter((user) =>
+    `${user.first_name} ${user.last_name}`
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase())
   );
 
   const handleOptionClick = (option) => {
     setSelectedOption(option);
+    const selected = lawyers.find(
+      (user) => `${user.first_name} ${user.last_name}` === option
+    );
+    setSelectedLawyer(selected);
     setIsOpen(false);
   };
+
+  const submitLawyer = async () => {
+    if (selectedLawyer) {
+      try {
+        const response = await axios.post(
+          "https://api.guvenlisatkirala.com/api/select-lawyer/",
+          { lawyer_id: selectedLawyer.id },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        console.log("API Response:", response.data);
+      } catch (error) {
+        console.error("Error submitting lawyer:", error);
+      }
+    } else {
+      console.error("No lawyer selected");
+    }
+  };
+
   return (
     <>
       <Banner />
@@ -50,36 +99,40 @@ const HairLawyer = () => {
             SEÇTİĞİNİZ AVUKAT İLANINIZI ONAYLADIKTAN SONRA İLANININIZ
             YAYINLANACAKTIR.
           </Description1>
-          <SearchLawyer>
-            <Heading1>Bir Avukat Seçin</Heading1>
-            <SearchContainer onClick={() => setIsOpen(!isOpen)}>
-              <Logo src={Law}></Logo>
-              <SearchInput
-                type="text"
-                value={selectedOption}
-                placeholder="George J....."
-                onChange={(e) => {
-                  setSearchTerm(e.target.value);
-                  setSelectedOption(e.target.value);
-                }}
-                onFocus={() => setIsOpen(true)}
-              />
-              <FaSearch />
-              {isOpen && (
-                <DropdownContainer>
-                  {filteredOptions.map((option, index) => (
-                    <Option
-                      key={index}
-                      onClick={() => handleOptionClick(option)}
-                    >
-                      {option}
-                    </Option>
-                  ))}
-                </DropdownContainer>
-              )}
-            </SearchContainer>
-          </SearchLawyer>
-          <Button>TAMAMLA</Button>
+          <LawyerContainer>
+            <SearchLawyer>
+              <Heading1>Bir Avukat Seçin</Heading1>
+              <SearchContainer onClick={() => setIsOpen(!isOpen)}>
+                <Logo src={Law}></Logo>
+                <SearchInput
+                  type="text"
+                  value={selectedOption}
+                  placeholder="George J....."
+                  onChange={(e) => {
+                    setSearchTerm(e.target.value);
+                    setSelectedOption(e.target.value);
+                  }}
+                  onFocus={() => setIsOpen(true)}
+                />
+                <FaSearch />
+              </SearchContainer>
+            </SearchLawyer>
+            {isOpen && (
+              <DropdownContainer>
+                {filteredOptions.map((user, index) => (
+                  <Option
+                    key={index}
+                    onClick={() =>
+                      handleOptionClick(`${user.first_name} ${user.last_name}`)
+                    }
+                  >
+                    {`${user.first_name} ${user.last_name}`}
+                  </Option>
+                ))}
+              </DropdownContainer>
+            )}
+          </LawyerContainer>
+          <Button onClick={submitLawyer}>TAMAMLA</Button>
         </LeftContainer>
         <RightContainer>
           <HeadingContainer>

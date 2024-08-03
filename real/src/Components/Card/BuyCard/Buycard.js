@@ -38,17 +38,25 @@ const Buycard = ({
 }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const images = [Pic, Pic1];
+
   const nextImage = () => {
     setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
   };
+
+  // Log the image URLs for debugging
+  console.log("Image URLs:", images);
+
   return (
     <MainCard>
       <Imagecontainer>
         <Image
-          src={images[currentImageIndex]}
-          alt="Default image"
+          src={images[currentImageIndex] || "/path/to/default_image.jpg"}
+          alt={Name || "Default image"}
           onMouseOver={nextImage}
           style={{ cursor: "pointer" }}
+          onError={(e) => {
+            e.target.src = "/path/to/default_image.jpg"; // Replace with your default image path
+          }}
         />
       </Imagecontainer>
       <MiddleContainer>

@@ -5,6 +5,7 @@ export const MainContainer = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 30px;
+  padding: 50px 0px;
   background-color: #eef1f9;
 `;
 export const Text = styled.p`

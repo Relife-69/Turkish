@@ -71,9 +71,9 @@ const TextContainer = styled.div`
 `;
 const Heading = styled.h1`
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 300;
   margin: 0%;
-  width: 70px;
+  width: 120px;
 `;
 const PriceContainer = styled.div`
   display: flex;

@@ -106,3 +106,14 @@ export const Button = styled.button`
     border: 2px solid #7b8cbf;
   }
 `;
+export const Humburger = styled.div`
+  font-size: 50px;
+  color: white;
+  display: none;
+  @media (max-width: 800px) {
+    display: flex;
+    position: absolute;
+    top: 8px;
+    left: 20px;
+  }
+`;

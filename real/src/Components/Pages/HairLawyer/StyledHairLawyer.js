@@ -127,20 +127,28 @@ export const SearchInput = styled.input`
     width: 180px;
   }
 `;
+export const LawyerContainer = styled.div`
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+`;
 
 export const DropdownContainer = styled.div`
-  position: absolute;
-  top: 85px;
-  width: 100%;
+  width: 490px;
   max-height: 200px;
   overflow-y: auto;
   background: white;
+  border-radius: 8px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
   z-index: 10;
 `;
 export const Option = styled.div`
   padding: 10px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
   &:hover {
     background: #f0f0f0;
   }
